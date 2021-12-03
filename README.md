@@ -1,6 +1,6 @@
 # kerastuner-slurm
 
-## conda environment
+## KT.yml
 Ensure you launch srun-kerastuner.sh with the correct conda environment active.  Additionally, add to ~/.bashrc to load that environment.
 
 
@@ -11,10 +11,12 @@ This is the sbatch script for launching the job and setting the total number of 
 ## run-dynamic.sh
 This script ensures that each node has staged the input data, then launches the python processes.  It will be run --ntasks times.  Each node should have a process where slurm_localid = 0. It also outputs some diagnostic information for debugging.
 
+
 ## copy-data.sh
 Ensures training/test data is staged appropriately
 
-## def set_environment()
+
+## keras-tuner-dynamic.py - def set_environment()
 This method in python dynamically sets the correct keras tuner environment variables. We utilize the fact that each node will get a set of procs where slurm_localid from 0 to gpus-1.  One node, the first in the list of SLURM_NODELIST, will get a slurm_localid=num_gpus_per_node.
 
 
